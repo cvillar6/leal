@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.sass'],
 })
-export class ListUserComponent {}
+export class ListUserComponent {
+  ID: string = 'Identificación';
+  NAME: string = 'Nombres';
+  LAST_NAME: string = 'Apellidos';
+  POINTS: string = 'Puntos acumulados';
+}
