@@ -50,6 +50,8 @@ const NAMES: string[] = [
   styleUrls: ['./table-user.component.sass'],
 })
 export class TableUserComponent implements AfterViewInit {
+  SEARCH: string = 'Buscar usuario';
+  SEARCH_PLACEHOLDER: string = 'Ingrese el nombre del usuario';
   ID: string = 'Identificación';
   NAME: string = 'Nombres';
   LAST_NAME: string = 'Apellidos';
