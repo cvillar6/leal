@@ -9,6 +9,7 @@ module.exports = {
           DEFAULT: '#FAFBFF',
           1: '#161619',
           2: '#656D76',
+          3: '#F9FAFB',
         },
         info: {
           DEFAULT: '#175CD3',
