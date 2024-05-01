@@ -1,1 +1,45 @@
-<p>list-user works!</p>
+<article>
+  <mat-accordion multi>
+    <mat-expansion-panel hideToggle expanded class="mb-2.5 rounded-lg">
+      <mat-expansion-panel-header class="flex h-auto justify-between p-4">
+        <mat-panel-title class="font-satoshiBold text-general-1 m-0 text-base">
+          <div class="flex items-center gap-2">
+            <div class="rounded bg-blue-300 p-2">CV</div>
+            <p>Personal data</p>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description
+          class="m-0 flex w-full flex-grow-0 justify-between"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="account_circle"
+          ></mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="pt-2.5">
+        <div class="mb-2.5 flex justify-between border-b pb-2.5">
+          <p class="font-satoshiMedium text-general-2">{{ ID }}</p>
+          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+        </div>
+
+        <div class="mb-2.5 flex justify-between border-b pb-2.5">
+          <p class="font-satoshiMedium text-general-2">{{ NAME }}</p>
+          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+        </div>
+
+        <div class="mb-2.5 flex justify-between border-b pb-2.5">
+          <p class="font-satoshiMedium text-general-2">{{ LAST_NAME }}</p>
+          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+        </div>
+
+        <div class="flex justify-between">
+          <p class="font-satoshiMedium text-general-2">{{ POINTS }}</p>
+          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</article>
