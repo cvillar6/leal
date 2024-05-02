@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
 import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
 
@@ -14,7 +15,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   LAST_NAME: string = 'Apellidos';
   POINTS: string = 'Puntos acumulados';
 
-  users$!: Observable<any>;
+  users$!: Observable<UserModel[]>;
   private userSubscription!: Subscription;
 
   constructor(

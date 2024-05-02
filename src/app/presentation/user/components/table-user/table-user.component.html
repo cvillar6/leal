@@ -13,7 +13,6 @@
     [dataSource]="dataSource"
     matSort
   >
-    <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th
         class="font-satoshiMedium text-general-2 bg-general-3"
@@ -32,8 +31,7 @@
       </td>
     </ng-container>
 
-    <!-- Progress Column -->
-    <ng-container matColumnDef="progress">
+    <ng-container matColumnDef="lastName">
       <th
         class="font-satoshiMedium text-general-2 bg-general-3"
         mat-header-cell
@@ -47,11 +45,10 @@
         mat-cell
         *matCellDef="let row"
       >
-        {{ row.progress }}%
+        {{ row.lastName }}%
       </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th
         class="font-satoshiMedium text-general-2 bg-general-3"
@@ -70,8 +67,7 @@
       </td>
     </ng-container>
 
-    <!-- Fruit Column -->
-    <ng-container matColumnDef="fruit">
+    <ng-container matColumnDef="points">
       <th
         class="font-satoshiMedium text-general-2 bg-general-3"
         mat-header-cell
@@ -85,7 +81,25 @@
         mat-cell
         *matCellDef="let row"
       >
-        {{ row.fruit }}
+        {{ row.points }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ STATUS }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1 py-3"
+        mat-cell
+        *matCellDef="let row"
+      >
+        {{ row.active }}
       </td>
     </ng-container>
 
