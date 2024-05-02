@@ -45,7 +45,9 @@
 
         <div class="flex justify-between">
           <p class="font-satoshiMedium text-general-2">{{ POINTS }}</p>
-          <p class="text-general-1 font-satoshiMedium">{{ user.points }}</p>
+          <p class="text-general-1 font-satoshiMedium">
+            {{ user.points | number }}
+          </p>
         </div>
       </section>
 
@@ -61,6 +63,7 @@
           {{ EDIT }}
         </button>
         <button
+          (click)="deleteUser(user.id)"
           class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border border-red-500 p-3 hover:bg-red-500 hover:text-white"
         >
           <mat-icon

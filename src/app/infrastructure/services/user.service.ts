@@ -18,4 +18,10 @@ export class UserService {
   addUser(user: UserModel): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${this.apiUrl}/users`, user);
   }
+
+  deleteUser(userId: string): Observable<{ success: boolean }> {
+    return this.httpClient.delete<{ success: boolean }>(
+      `${this.apiUrl}/users/${userId}`
+    );
+  }
 }

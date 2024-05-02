@@ -22,7 +22,7 @@ export class UserRepositoryImpl implements UserRepository {
     throw new Error('Method not implemented.');
   }
 
-  deleteUser(id: string) {
-    throw new Error('Method not implemented.');
+  deleteUser(userId: string): Observable<{ success: boolean }> {
+    return this.userService.deleteUser(userId);
   }
 }
