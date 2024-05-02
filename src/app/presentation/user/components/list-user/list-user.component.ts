@@ -16,7 +16,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   POINTS: string = 'Puntos acumulados';
 
   users$!: Observable<UserModel[]>;
-  private userSubscription!: Subscription;
+  private refreshUsersSubscription!: Subscription;
 
   constructor(
     private userRepository: UserRepository,
@@ -25,9 +25,11 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUsers();
-    this.userSubscription = this.userDataService.users$.subscribe(() => {
-      this.getUsers();
-    });
+    this.refreshUsersSubscription = this.userDataService.users$.subscribe(
+      () => {
+        this.getUsers();
+      }
+    );
   }
 
   getUsers(): void {
@@ -35,6 +37,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSubscription?.unsubscribe();
+    this.refreshUsersSubscription?.unsubscribe();
   }
 }

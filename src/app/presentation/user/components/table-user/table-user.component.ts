@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
 import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
@@ -24,8 +24,8 @@ export class TableUserComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'lastName', 'points', 'active'];
   dataSource!: MatTableDataSource<UserModel>;
 
-  users$!: Observable<UserModel[]>;
-  private userSubscription!: Subscription;
+  private usersSubscription!: Subscription;
+  private refreshUsersSubscription!: Subscription;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,17 +33,15 @@ export class TableUserComponent implements OnInit, AfterViewInit {
   constructor(
     private userRepository: UserRepository,
     private userDataService: UserDataService
-  ) {
-    // Create 100 users
-    // Assign the data to the data source for the table to render
-    // this.dataSource = new MatTableDataSource(users);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
-    this.userSubscription = this.userDataService.users$.subscribe(() => {
-      this.getUsers();
-    });
+    this.refreshUsersSubscription = this.userDataService.users$.subscribe(
+      () => {
+        this.getUsers();
+      }
+    );
   }
 
   ngAfterViewInit() {
@@ -52,7 +50,7 @@ export class TableUserComponent implements OnInit, AfterViewInit {
   }
 
   getUsers(): void {
-    this.userRepository
+    this.usersSubscription = this.userRepository
       .getUsers()
       .subscribe(
         (users: UserModel[]) =>
@@ -70,6 +68,7 @@ export class TableUserComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.userSubscription?.unsubscribe();
+    this.usersSubscription?.unsubscribe();
+    this.refreshUsersSubscription?.unsubscribe();
   }
 }
