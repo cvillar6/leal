@@ -10,28 +10,6 @@
   </header>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="mb-4 w-full">
-      <mat-label class="font-satoshiMedium text-general-2 text-base">{{
-        ID
-      }}</mat-label>
-      <input
-        matInput
-        formControlName="id"
-        [placeholder]="ID_PLACEHOLDER"
-        class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
-      />
-    </mat-form-field>
-    <!-- <mat-error
-          *ngIf="
-            emailFormControl.hasError('email') &&
-            !emailFormControl.hasError('required')
-          "
-        >
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error> -->
-    <mat-form-field class="mb-4 w-full">
       <mat-label class="font-satoshiMedium text-general-2">{{
         NAME
       }}</mat-label>

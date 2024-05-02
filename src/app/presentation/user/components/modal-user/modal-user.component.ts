@@ -1,13 +1,17 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/core/models/user.model';
+import { UserRepository } from 'src/app/core/repositories/user.repository';
+import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
 
 @Component({
   selector: 'app-modal-user',
   templateUrl: './modal-user.component.html',
   styleUrls: ['./modal-user.component.sass'],
 })
-export class ModalUserComponent {
+export class ModalUserComponent implements OnDestroy {
   CREATE_USER: string = 'Crear usuario';
   CREATE: string = 'Crear';
 
@@ -20,20 +24,43 @@ export class ModalUserComponent {
   POINTS: string = 'Puntos acumulados';
   POINTS_PLACEHOLDER: string = 'Ingresa los puntos acumulados';
 
+  UNKNOW: string = 'Desconocido';
+
+  private userAdded!: Subscription;
+
   userForm = this.formBuilder.group({
-    id: ['', Validators.required],
     name: ['', Validators.required],
     lastName: ['', Validators.required],
-    points: [''],
+    points: [],
   });
 
   constructor(
+    private dialogRef: MatDialogRef<ModalUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userRepository: UserRepository,
+    private userDataService: UserDataService
   ) {}
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.log(this.userForm.value);
+    const newUser: UserModel = {
+      name: this.userForm.value.name ?? this.UNKNOW,
+      lastName: this.userForm.value.lastName ?? this.UNKNOW,
+      points: this.userForm.value.points ?? 0,
+      active: true,
+    };
+
+    this.addUser(newUser);
+  }
+
+  addUser(user: UserModel): void {
+    this.userAdded = this.userRepository.addUser(user).subscribe(() => {
+      this.userDataService.refreshUsersData();
+      this.dialogRef.close();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.userAdded?.unsubscribe();
   }
 }

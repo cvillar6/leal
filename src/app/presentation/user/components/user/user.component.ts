@@ -40,19 +40,8 @@ export class UserComponent implements OnInit, OnDestroy {
     );
   }
 
-  private breakpointChanged() {
+  private breakpointChanged(): void {
     this.isDesktop = this.breakpointObserver.isMatched('(min-width: 1024px)');
-  }
-
-  addUser() {
-    this.userRepository
-      .addUser({
-        name: 'Camilo',
-        lastName: 'xd',
-        points: 1000,
-        active: true,
-      })
-      .subscribe(() => this.userDataService.refreshUsersData());
   }
 
   getUsers(): void {
