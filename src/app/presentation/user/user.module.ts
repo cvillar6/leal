@@ -1,5 +1,8 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CountUserComponent } from './components/count-user/count-user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
+import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { UserComponent } from './components/user/user.component';
 
@@ -19,6 +23,7 @@ const angularMaterialModules = [
   MatFormFieldModule,
   MatPaginatorModule,
   MatInputModule,
+  MatDialogModule,
 ];
 
 @NgModule({
@@ -28,8 +33,14 @@ const angularMaterialModules = [
     UserComponent,
     CreateUserComponent,
     CountUserComponent,
+    ModalUserComponent,
   ],
-  imports: [CommonModule, ...angularMaterialModules],
+  imports: [
+    CommonModule,
+    LayoutModule,
+    ReactiveFormsModule,
+    ...angularMaterialModules,
+  ],
   exports: [UserComponent],
 })
 export class UserModule {}

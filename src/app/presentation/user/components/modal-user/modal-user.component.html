@@ -1,0 +1,109 @@
+<article class="p-4">
+  <header class="mb-4 flex items-center gap-2 border-b pb-4">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Create user"
+      fontIcon="add"
+      class="text-blue-800"
+    ></mat-icon>
+    <p class="font-satoshiBold text-2xl">{{ CREATE_USER }}</p>
+  </header>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="mb-4 w-full">
+      <mat-label class="font-satoshiMedium text-general-2 text-base">{{
+        ID
+      }}</mat-label>
+      <input
+        matInput
+        formControlName="id"
+        [placeholder]="ID_PLACEHOLDER"
+        class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
+      />
+    </mat-form-field>
+    <!-- <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error> -->
+    <mat-form-field class="mb-4 w-full">
+      <mat-label class="font-satoshiMedium text-general-2">{{
+        NAME
+      }}</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        [placeholder]="NAME_PLACEHOLDER"
+        class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
+      />
+    </mat-form-field>
+    <!-- <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error> -->
+    <mat-form-field class="mb-4 w-full">
+      <mat-label class="font-satoshiMedium text-general-2">{{
+        LAST_NAME
+      }}</mat-label>
+      <input
+        matInput
+        formControlName="lastName"
+        [placeholder]="LAST_NAME_PLACEHOLDER"
+        class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
+      />
+    </mat-form-field>
+    <!-- <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error> -->
+    <mat-form-field class="mb-4 w-full">
+      <mat-label class="font-satoshiMedium text-general-2">{{
+        POINTS
+      }}</mat-label>
+      <input
+        matInput
+        formControlName="points"
+        [placeholder]="POINTS_PLACEHOLDER"
+        class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
+      />
+    </mat-form-field>
+    <!-- <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error> -->
+
+    <button
+      [disabled]="userForm.invalid"
+      type="submit"
+      class="font-satoshiBold w-full rounded-lg bg-blue-800 px-6 py-4 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
+    >
+      {{ CREATE }}
+    </button>
+  </form>
+</article>
