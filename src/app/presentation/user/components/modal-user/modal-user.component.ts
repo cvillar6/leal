@@ -16,6 +16,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   EDIT_USER: string = 'Editar usuario';
   CREATE: string = 'Crear';
   EDIT: string = 'Editar';
+  CANCEL: string = 'Cancelar';
 
   ID: string = 'Identificación';
   ID_PLACEHOLDER: string = 'Ingresa la identificación';
@@ -26,15 +27,20 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   POINTS: string = 'Puntos acumulados';
   POINTS_PLACEHOLDER: string = 'Ingresa los puntos acumulados';
 
+  ACTIVE: string = 'Activar';
+  DEACTIVE: string = 'Desactivar';
+
   UNKNOW: string = 'Desconocido';
 
   private userAdded!: Subscription;
   private userUpdated!: Subscription;
 
   userForm = this.formBuilder.group({
+    id: [{ value: '', disabled: true }],
     name: ['', Validators.required],
     lastName: ['', Validators.required],
     points: [0],
+    active: [true],
   });
 
   constructor(
@@ -48,9 +54,11 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.editUser) {
       this.userForm.patchValue({
+        id: this.editUser.id,
         name: this.editUser.name,
         lastName: this.editUser.lastName,
         points: this.editUser.points,
+        active: this.editUser.active,
       });
     }
   }
@@ -60,7 +68,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
       name: this.userForm.value.name ?? this.UNKNOW,
       lastName: this.userForm.value.lastName ?? this.UNKNOW,
       points: this.userForm.value.points ?? 0,
-      active: true,
+      active: this.userForm.value.active ?? true,
     };
 
     this.editUser
@@ -71,15 +79,19 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   addUser(user: UserModel): void {
     this.userAdded = this.userRepository.addUser(user).subscribe(() => {
       this.userDataService.refreshUsersData();
-      this.dialogRef.close();
+      this.closeDialog();
     });
   }
 
   updateUser(user: UserModel): void {
     this.userUpdated = this.userRepository.updateUser(user).subscribe(() => {
       this.userDataService.refreshUsersData();
-      this.dialogRef.close();
+      this.closeDialog();
     });
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
   ngOnDestroy(): void {

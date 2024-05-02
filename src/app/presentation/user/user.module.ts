@@ -9,14 +9,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { CountUserComponent } from './components/count-user/count-user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { DataUserComponent } from './components/data-user/data-user.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { UserComponent } from './components/user/user.component';
-import { DataUserComponent } from './components/data-user/data-user.component';
 
 const angularMaterialModules = [
   MatExpansionModule,
@@ -26,6 +27,7 @@ const angularMaterialModules = [
   MatPaginatorModule,
   MatInputModule,
   MatDialogModule,
+  MatSlideToggleModule,
 ];
 
 @NgModule({
