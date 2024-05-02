@@ -6,7 +6,9 @@
       fontIcon="add"
       class="text-blue-800"
     ></mat-icon>
-    <p class="font-satoshiBold text-2xl">{{ CREATE_USER }}</p>
+    <p class="font-satoshiBold text-2xl">
+      {{ editUser ? EDIT_USER : CREATE_USER }}
+    </p>
   </header>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="mb-4 w-full">
@@ -81,7 +83,7 @@
       type="submit"
       class="font-satoshiBold w-full rounded-lg bg-blue-800 px-6 py-4 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
     >
-      {{ CREATE }}
+      {{ editUser ? EDIT : CREATE }}
     </button>
   </form>
 </article>

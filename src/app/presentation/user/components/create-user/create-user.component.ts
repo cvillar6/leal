@@ -16,10 +16,6 @@ export class CreateUserComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    this.dialog.open(ModalUserComponent, {
-      data: {
-        animal: 'panda',
-      },
-    });
+    this.dialog.open(ModalUserComponent);
   }
 }

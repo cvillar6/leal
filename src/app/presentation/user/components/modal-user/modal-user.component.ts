@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -11,9 +11,11 @@ import { UserDataService } from 'src/app/infrastructure/services/user-data.servi
   templateUrl: './modal-user.component.html',
   styleUrls: ['./modal-user.component.sass'],
 })
-export class ModalUserComponent implements OnDestroy {
+export class ModalUserComponent implements OnInit, OnDestroy {
   CREATE_USER: string = 'Crear usuario';
+  EDIT_USER: string = 'Editar usuario';
   CREATE: string = 'Crear';
+  EDIT: string = 'Editar';
 
   ID: string = 'Identificación';
   ID_PLACEHOLDER: string = 'Ingresa la identificación';
@@ -27,20 +29,31 @@ export class ModalUserComponent implements OnDestroy {
   UNKNOW: string = 'Desconocido';
 
   private userAdded!: Subscription;
+  private userUpdated!: Subscription;
 
   userForm = this.formBuilder.group({
     name: ['', Validators.required],
     lastName: ['', Validators.required],
-    points: [],
+    points: [0],
   });
 
   constructor(
     private dialogRef: MatDialogRef<ModalUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public editUser: UserModel | undefined,
     private formBuilder: FormBuilder,
     private userRepository: UserRepository,
     private userDataService: UserDataService
   ) {}
+
+  ngOnInit(): void {
+    if (this.editUser) {
+      this.userForm.patchValue({
+        name: this.editUser.name,
+        lastName: this.editUser.lastName,
+        points: this.editUser.points,
+      });
+    }
+  }
 
   onSubmit() {
     const newUser: UserModel = {
@@ -50,7 +63,9 @@ export class ModalUserComponent implements OnDestroy {
       active: true,
     };
 
-    this.addUser(newUser);
+    this.editUser
+      ? this.updateUser({ id: this.editUser.id, ...newUser })
+      : this.addUser(newUser);
   }
 
   addUser(user: UserModel): void {
@@ -60,7 +75,15 @@ export class ModalUserComponent implements OnDestroy {
     });
   }
 
+  updateUser(user: UserModel): void {
+    this.userUpdated = this.userRepository.updateUser(user).subscribe(() => {
+      this.userDataService.refreshUsersData();
+      this.dialogRef.close();
+    });
+  }
+
   ngOnDestroy(): void {
     this.userAdded?.unsubscribe();
+    this.userUpdated?.unsubscribe();
   }
 }

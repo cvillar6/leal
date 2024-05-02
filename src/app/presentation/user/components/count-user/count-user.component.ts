@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class CountUserComponent {
   @Input() title!: string;
   @Input() data!: number;
-  @Input() percentage!: number;
+  @Input() percentage?: number;
   @Input() icon!: string;
   @Input() color!: string;
   @Input() textColor!: string;

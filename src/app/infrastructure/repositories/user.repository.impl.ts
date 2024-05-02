@@ -18,8 +18,8 @@ export class UserRepositoryImpl implements UserRepository {
     return this.userService.addUser(user);
   }
 
-  updateUser(user: UserModel) {
-    throw new Error('Method not implemented.');
+  updateUser(user: UserModel): Observable<UserModel> {
+    return this.userService.updateUser(user);
   }
 
   deleteUser(userId: string): Observable<{ success: boolean }> {

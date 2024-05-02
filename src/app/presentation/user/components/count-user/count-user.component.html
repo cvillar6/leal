@@ -14,6 +14,8 @@
     <p class="text-general-1 font-satoshiBold m-0 text-2xl">
       {{ data | number }}
     </p>
-    <p class="text-general-1 m-0 text-sm">{{ percentage | percent }}</p>
+    <p *ngIf="percentage" class="text-general-1 m-0 text-sm">
+      {{ percentage | percent }}
+    </p>
   </div>
 </article>

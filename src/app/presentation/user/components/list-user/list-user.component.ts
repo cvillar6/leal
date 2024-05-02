@@ -4,10 +4,12 @@ import {
   Input,
   OnDestroy,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
 import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
 
 @Component({
   selector: 'app-list-user',
@@ -29,6 +31,7 @@ export class ListUserComponent implements OnDestroy {
   private userDeleted!: Subscription;
 
   constructor(
+    public dialog: MatDialog,
     private userRepository: UserRepository,
     private userDataService: UserDataService
   ) {}
@@ -37,6 +40,12 @@ export class ListUserComponent implements OnDestroy {
     this.userDeleted = this.userRepository
       .deleteUser(userId ?? '')
       .subscribe(() => this.userDataService.refreshUsersData());
+  }
+
+  updateUser(user: UserModel) {
+    this.dialog.open(ModalUserComponent, {
+      data: user,
+    });
   }
 
   ngOnDestroy(): void {
