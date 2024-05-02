@@ -1,8 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, distinctUntilChanged, switchMap, take } from 'rxjs';
+import { Subscription, distinctUntilChanged } from 'rxjs';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
-import { User2Service } from 'src/app/infrastructure/services/user2.service';
+import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
 
 @Component({
   selector: 'app-user',
@@ -21,7 +21,7 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private userRepository: UserRepository,
-    private userRepository2: User2Service
+    private userDataService: UserDataService
   ) {}
 
   ngOnInit(): void {
@@ -37,12 +37,12 @@ export class UserComponent implements OnInit, OnDestroy {
   addUser() {
     this.userRepository
       .addUser({
-        name: 'Oelo',
+        name: 'Camilo',
         lastName: 'xd',
         points: 1000,
         active: true,
       })
-      .subscribe(() => this.userRepository2.refreshUsers());
+      .subscribe(() => this.userDataService.refreshUsersData());
   }
 
   ngOnDestroy(): void {

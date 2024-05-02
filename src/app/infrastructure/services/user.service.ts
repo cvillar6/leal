@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://leal-2.free.beeceptor.com/api';
+  private apiUrl = 'https://leal-3.free.beeceptor.com/api';
 
   constructor(private httpClient: HttpClient) {}
 
-  getUsers(): any {
-    return this.httpClient.get<any>(`${this.apiUrl}/users`);
+  getUsers(): Observable<UserModel[]> {
+    return this.httpClient.get<UserModel[]>(`${this.apiUrl}/users`);
   }
 
-  addUser(user: UserModel): any {
-    return this.httpClient.post<any>(`${this.apiUrl}/users`, user);
+  addUser(user: UserModel): Observable<UserModel> {
+    return this.httpClient.post<UserModel>(`${this.apiUrl}/users`, user);
   }
 }

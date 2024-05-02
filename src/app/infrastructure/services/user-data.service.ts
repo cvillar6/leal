@@ -4,13 +4,11 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class User2Service {
-  private usersSubject = new Subject<any>();
+export class UserDataService {
+  private usersSubject = new Subject<void>();
   users$ = this.usersSubject.asObservable();
 
-  refreshUsers() {
-    console.log('hola');
-
-    this.usersSubject.next({});
+  refreshUsersData(): void {
+    this.usersSubject.next();
   }
 }
