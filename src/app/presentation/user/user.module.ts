@@ -1,5 +1,6 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -38,6 +39,7 @@ const angularMaterialModules = [
   imports: [
     CommonModule,
     LayoutModule,
+    HttpClientModule,
     ReactiveFormsModule,
     ...angularMaterialModules,
   ],
