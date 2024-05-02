@@ -12,12 +12,12 @@
   </section>
 
   <section *ngIf="isDesktop; else userList" class="mx-auto max-w-[968px]">
-    <app-table-user></app-table-user>
+    <app-table-user [users]="users"></app-table-user>
   </section>
 
   <ng-template #userList>
     <section>
-      <app-list-user></app-list-user>
+      <app-list-user [users]="users"></app-list-user>
     </section>
   </ng-template>
 

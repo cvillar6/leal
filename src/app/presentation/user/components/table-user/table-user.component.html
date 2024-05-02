@@ -1,4 +1,4 @@
-<article>
+<article *ngIf="users; else loading">
   <input
     class="mb-4 min-w-80 rounded-lg border p-4"
     matInput
@@ -120,3 +120,7 @@
     aria-label="Select page of users"
   ></mat-paginator>
 </article>
+
+<ng-template #loading>
+  <div>Cargando</div>
+</ng-template>

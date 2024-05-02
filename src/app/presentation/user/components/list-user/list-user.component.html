@@ -1,7 +1,7 @@
 <article>
-  <mat-accordion *ngIf="users$; else loading" multi>
+  <mat-accordion *ngIf="users; else loading" multi>
     <mat-expansion-panel
-      *ngFor="let user of users$ | async"
+      *ngFor="let user of users"
       hideToggle
       class="mb-2.5 rounded-lg"
     >

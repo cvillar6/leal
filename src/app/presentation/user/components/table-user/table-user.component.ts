@@ -1,18 +1,22 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
-import { UserRepository } from 'src/app/core/repositories/user.repository';
-import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
 
 @Component({
   selector: 'app-table-user',
   templateUrl: './table-user.component.html',
   styleUrls: ['./table-user.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableUserComponent implements OnInit, AfterViewInit {
+export class TableUserComponent implements OnChanges {
   SEARCH: string = 'Buscar usuario';
   SEARCH_PLACEHOLDER: string = 'Ingrese el nombre del usuario';
   ID: string = 'Identificación';
@@ -24,38 +28,19 @@ export class TableUserComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'lastName', 'points', 'active'];
   dataSource!: MatTableDataSource<UserModel>;
 
-  private usersSubscription!: Subscription;
-  private refreshUsersSubscription!: Subscription;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private userRepository: UserRepository,
-    private userDataService: UserDataService
-  ) {}
+  @Input() users!: UserModel[];
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.getUsers();
-    this.refreshUsersSubscription = this.userDataService.users$.subscribe(
-      () => {
-        this.getUsers();
-      }
-    );
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   getUsers(): void {
-    this.usersSubscription = this.userRepository
-      .getUsers()
-      .subscribe(
-        (users: UserModel[]) =>
-          (this.dataSource = new MatTableDataSource(users))
-      );
+    this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
@@ -65,10 +50,5 @@ export class TableUserComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.usersSubscription?.unsubscribe();
-    this.refreshUsersSubscription?.unsubscribe();
   }
 }

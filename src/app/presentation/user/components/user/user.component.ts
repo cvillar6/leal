@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, distinctUntilChanged } from 'rxjs';
+import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
 import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
 
@@ -15,8 +16,11 @@ export class UserComponent implements OnInit, OnDestroy {
     .pipe(distinctUntilChanged());
 
   breakpointSubscription!: Subscription;
-
   isDesktop: boolean = false;
+
+  users!: UserModel[];
+  private usersSubscription!: Subscription;
+  private refreshUsersSubscription!: Subscription;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -25,6 +29,12 @@ export class UserComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getUsers();
+    this.refreshUsersSubscription = this.userDataService.users$.subscribe(
+      () => {
+        this.getUsers();
+      }
+    );
     this.breakpointSubscription = this.breakpoint$.subscribe(() =>
       this.breakpointChanged()
     );
@@ -45,7 +55,17 @@ export class UserComponent implements OnInit, OnDestroy {
       .subscribe(() => this.userDataService.refreshUsersData());
   }
 
+  getUsers(): void {
+    this.usersSubscription = this.userRepository
+      .getUsers()
+      .subscribe((users: UserModel[]) => {
+        this.users = users;
+      });
+  }
+
   ngOnDestroy(): void {
     this.breakpointSubscription?.unsubscribe();
+    this.refreshUsersSubscription?.unsubscribe();
+    this.usersSubscription?.unsubscribe();
   }
 }
