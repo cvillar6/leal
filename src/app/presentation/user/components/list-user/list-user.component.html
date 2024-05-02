@@ -3,6 +3,7 @@
     <mat-expansion-panel
       *ngFor="let user of users"
       hideToggle
+      expanded
       class="mb-2.5 rounded-lg"
     >
       <mat-expansion-panel-header class="flex h-auto justify-between p-4">
@@ -26,7 +27,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <div class="pt-2.5">
+      <section class="mb-4 pt-2.5">
         <div class="mb-2.5 flex justify-between border-b pb-2.5">
           <p class="font-satoshiMedium text-general-2">{{ ID }}</p>
           <p class="text-general-1 font-satoshiMedium">{{ user.id }}</p>
@@ -46,7 +47,30 @@
           <p class="font-satoshiMedium text-general-2">{{ POINTS }}</p>
           <p class="text-general-1 font-satoshiMedium">{{ user.points }}</p>
         </div>
-      </div>
+      </section>
+
+      <section class="flex gap-2 pt-2.5">
+        <button
+          class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border border-blue-500 p-3 hover:bg-blue-500 hover:text-white"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Editar"
+            fontIcon="edit"
+          ></mat-icon>
+          {{ EDIT }}
+        </button>
+        <button
+          class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border border-red-500 p-3 hover:bg-red-500 hover:text-white"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Eliminar"
+            fontIcon="delete"
+          ></mat-icon>
+          {{ REMOVE }}
+        </button>
+      </section>
     </mat-expansion-panel>
   </mat-accordion>
 

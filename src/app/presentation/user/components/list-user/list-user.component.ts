@@ -13,5 +13,8 @@ export class ListUserComponent {
   LAST_NAME: string = 'Apellidos';
   POINTS: string = 'Puntos acumulados';
 
+  EDIT: string = 'Editar';
+  REMOVE: string = 'Eliminar';
+
   @Input() users!: UserModel[];
 }
