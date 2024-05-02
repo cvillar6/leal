@@ -1,5 +1,6 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,6 +16,7 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { UserComponent } from './components/user/user.component';
+import { DataUserComponent } from './components/data-user/data-user.component';
 
 const angularMaterialModules = [
   MatExpansionModule,
@@ -34,10 +36,12 @@ const angularMaterialModules = [
     CreateUserComponent,
     CountUserComponent,
     ModalUserComponent,
+    DataUserComponent,
   ],
   imports: [
     CommonModule,
     LayoutModule,
+    HttpClientModule,
     ReactiveFormsModule,
     ...angularMaterialModules,
   ],

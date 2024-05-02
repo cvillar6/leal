@@ -1,11 +1,18 @@
 <article>
-  <mat-accordion multi>
-    <mat-expansion-panel hideToggle class="mb-2.5 rounded-lg">
+  <mat-accordion *ngIf="users; else loading" multi>
+    <mat-expansion-panel
+      *ngFor="let user of users"
+      hideToggle
+      class="mb-2.5 rounded-lg"
+    >
       <mat-expansion-panel-header class="flex h-auto justify-between p-4">
         <mat-panel-title class="font-satoshiBold text-general-1 m-0 text-base">
           <div class="flex items-center gap-2">
-            <div class="rounded bg-blue-300 p-2">CV</div>
-            <p>Personal data</p>
+            <div class="rounded bg-blue-300 p-2">
+              {{ user.name.charAt(0).toUpperCase()
+              }}{{ user.lastName.charAt(0).toUpperCase() }}
+            </div>
+            <p>{{ user.name }}</p>
           </div>
         </mat-panel-title>
         <mat-panel-description
@@ -22,24 +29,28 @@
       <div class="pt-2.5">
         <div class="mb-2.5 flex justify-between border-b pb-2.5">
           <p class="font-satoshiMedium text-general-2">{{ ID }}</p>
-          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+          <p class="text-general-1 font-satoshiMedium">{{ user.id }}</p>
         </div>
 
         <div class="mb-2.5 flex justify-between border-b pb-2.5">
           <p class="font-satoshiMedium text-general-2">{{ NAME }}</p>
-          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+          <p class="text-general-1 font-satoshiMedium">{{ user.name }}</p>
         </div>
 
         <div class="mb-2.5 flex justify-between border-b pb-2.5">
           <p class="font-satoshiMedium text-general-2">{{ LAST_NAME }}</p>
-          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+          <p class="text-general-1 font-satoshiMedium">{{ user.lastName }}</p>
         </div>
 
         <div class="flex justify-between">
           <p class="font-satoshiMedium text-general-2">{{ POINTS }}</p>
-          <p class="text-general-1 font-satoshiMedium">1035833794</p>
+          <p class="text-general-1 font-satoshiMedium">{{ user.points }}</p>
         </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <ng-template #loading>
+    <div>Cargando</div>
+  </ng-template>
 </article>
