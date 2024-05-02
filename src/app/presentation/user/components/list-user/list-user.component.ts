@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from 'src/app/core/models/user.model';
+import { Observable, Subscription, take } from 'rxjs';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
+import { User2Service } from 'src/app/infrastructure/services/user2.service';
 
 @Component({
   selector: 'app-list-user',
@@ -13,15 +14,27 @@ export class ListUserComponent implements OnInit {
   LAST_NAME: string = 'Apellidos';
   POINTS: string = 'Puntos acumulados';
 
-  users: UserModel[] = [];
+  users$!: Observable<any>;
+  private userSubscription!: Subscription;
 
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private userRepository2: User2Service
+  ) {}
 
   ngOnInit() {
-    this.loadUsers();
+    this.getUsers();
+    this.userSubscription = this.userRepository2.users$.subscribe(() => {
+      console.log('hey?');
+      this.getUsers(); // Reload the list of users when a new user is added
+    });
   }
 
-  loadUsers(): void {
-    // this.userRepository.getUsers().subscribe();
+  getUsers(): void {
+    this.users$ = this.userRepository.getUsers();
   }
+
+  // loadUsers(): void {
+  //   this.userRepository.getUsers().subscribe();
+  // }
 }

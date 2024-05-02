@@ -12,7 +12,7 @@ export class UserRepositoryImpl implements UserRepository {
     return this.userService.getUsers();
   }
   addUser(user: UserModel) {
-    throw new Error('Method not implemented.');
+    return this.userService.addUser(user);
   }
   updateUser(user: UserModel) {
     throw new Error('Method not implemented.');
