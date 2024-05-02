@@ -7,7 +7,7 @@ import { UserModel } from 'src/app/core/models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://leal-4.free.beeceptor.com/api';
+  private apiUrl = 'https://leal-5.free.beeceptor.com/api';
 
   constructor(private httpClient: HttpClient) {}
 

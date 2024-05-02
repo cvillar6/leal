@@ -1,0 +1,28 @@
+<article
+  class="flex justify-between gap-10 overflow-x-auto rounded-lg bg-white p-4 shadow lg:gap-0 lg:p-6"
+>
+  <app-count-user
+    [title]="USERS"
+    [data]="numberOfUsers"
+    [percentage]="1"
+    [icon]="'group'"
+    [color]="'bg-blue-300'"
+    [textColor]="'text-blue-800'"
+  ></app-count-user>
+  <app-count-user
+    [title]="ACTIVE"
+    [data]="activeUsers"
+    [percentage]="activeUsers / numberOfUsers"
+    [icon]="'done'"
+    [color]="'bg-green-300'"
+    [textColor]="'text-green-800'"
+  ></app-count-user>
+  <app-count-user
+    [title]="DEACTIVATE"
+    [data]="deactivateUsers"
+    [percentage]="deactivateUsers / numberOfUsers"
+    [icon]="'block'"
+    [color]="'bg-red-300'"
+    [textColor]="'text-red-800'"
+  ></app-count-user>
+</article>

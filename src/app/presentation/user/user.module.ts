@@ -16,6 +16,7 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { UserComponent } from './components/user/user.component';
+import { DataUserComponent } from './components/data-user/data-user.component';
 
 const angularMaterialModules = [
   MatExpansionModule,
@@ -35,6 +36,7 @@ const angularMaterialModules = [
     CreateUserComponent,
     CountUserComponent,
     ModalUserComponent,
+    DataUserComponent,
   ],
   imports: [
     CommonModule,
