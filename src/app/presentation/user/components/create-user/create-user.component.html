@@ -8,7 +8,10 @@
     <p class="font-satoshi text-general-2">{{ USERS_DESCRIPTION }}</p>
   </div>
 
-  <button class="font-satoshiBold rounded-lg bg-blue-800 px-6 py-4 text-white">
+  <button
+    class="font-satoshiBold rounded-lg bg-blue-800 px-6 py-4 text-white"
+    (click)="openDialog()"
+  >
     {{ CREATE }}
   </button>
 </article>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
 
 @Component({
   selector: 'app-create-user',
@@ -10,4 +12,14 @@ export class CreateUserComponent {
   USERS_DESCRIPTION: string =
     'Aquí puedes crear, editar y eliminar tus usuarios';
   CREATE: string = 'Crear usuario';
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(ModalUserComponent, {
+      data: {
+        animal: 'panda',
+      },
+    });
+  }
 }

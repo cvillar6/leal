@@ -2,6 +2,7 @@
   <section class="mx-auto mb-10 max-w-[968px]">
     <app-create-user></app-create-user>
   </section>
+
   <section
     class="mb-10 flex max-w-[968px] justify-between gap-10 overflow-x-auto rounded-lg bg-white p-4 shadow lg:mx-auto lg:gap-0 lg:p-6"
   >
@@ -9,7 +10,14 @@
     <app-count-user></app-count-user>
     <app-count-user></app-count-user>
   </section>
-  <section class="max-w-[968px] lg:mx-auto">
+
+  <section *ngIf="isDesktop; else userList" class="mx-auto max-w-[968px]">
     <app-table-user></app-table-user>
   </section>
+
+  <ng-template #userList>
+    <section>
+      <app-list-user></app-list-user>
+    </section>
+  </ng-template>
 </main>
