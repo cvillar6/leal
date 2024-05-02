@@ -31,25 +31,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="lastName">
-      <th
-        class="font-satoshiMedium text-general-2 bg-general-3"
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-      >
-        {{ LAST_NAME }}
-      </th>
-      <td
-        class="font-satoshiBold text-general-1"
-        mat-cell
-        *matCellDef="let row"
-      >
-        {{ row.lastName }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="fullName">
       <th
         class="font-satoshiMedium text-general-2 bg-general-3"
         mat-header-cell
@@ -59,11 +41,11 @@
         {{ NAME }}
       </th>
       <td
-        class="font-satoshiBold text-general-1 py-3"
+        class="font-satoshiBold text-general-1"
         mat-cell
         *matCellDef="let row"
       >
-        {{ row.name }}
+        {{ row.name }} {{ row.lastName }}
       </td>
     </ng-container>
 
@@ -81,7 +63,7 @@
         mat-cell
         *matCellDef="let row"
       >
-        {{ row.points }}
+        {{ row.points | number }}
       </td>
     </ng-container>
 
@@ -100,6 +82,47 @@
         *matCellDef="let row"
       >
         {{ row.active }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ ACTIONS }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1 py-3"
+        mat-cell
+        *matCellDef="let row"
+      >
+        <div class="flex gap-2">
+          <button
+            (click)="updateUser(row)"
+            class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border p-2"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Editar"
+              fontIcon="edit"
+            ></mat-icon>
+            {{ EDIT }}
+          </button>
+          <button
+            (click)="deleteUser(row.id)"
+            class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border p-2"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Eliminar"
+              fontIcon="delete"
+            ></mat-icon>
+            {{ REMOVE }}
+          </button>
+        </div>
       </td>
     </ng-container>
 
