@@ -1,0 +1,18 @@
+<article
+  class="flex flex-col gap-4 rounded-lg bg-white p-4 shadow lg:flex-row lg:items-center lg:justify-between"
+>
+  <div>
+    <h1 class="font-satoshiBold text-general-1 mb-2.5 text-3xl">
+      {{ USERS }} 🧑🏻‍💼👩🏻‍💼
+    </h1>
+    <p class="font-satoshi text-general-2">{{ USERS_DESCRIPTION }}</p>
+  </div>
+
+  <button
+    class="font-satoshiBold rounded-lg bg-blue-800 px-6 py-4 text-white"
+    (click)="openDialog()"
+    *ngIf="permissionService.isAdmin()"
+  >
+    {{ CREATE }}
+  </button>
+</article>

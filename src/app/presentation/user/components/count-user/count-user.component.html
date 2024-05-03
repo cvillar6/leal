@@ -1,0 +1,21 @@
+<article class="flex min-w-40 items-center gap-2">
+  <div [class]="'flex items-center justify-center rounded-full p-4 ' + color">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      [fontIcon]="icon"
+      [class]="textColor"
+    ></mat-icon>
+  </div>
+  <div class="flex flex-col">
+    <p class="text-general-2 font-satoshiMedium m-0 text-base">
+      {{ title }}
+    </p>
+    <p class="text-general-1 font-satoshiBold m-0 text-2xl">
+      {{ data | number }}
+    </p>
+    <p *ngIf="percentage" class="text-general-1 font-satoshiMedium m-0 text-sm">
+      {{ percentage | percent }}
+    </p>
+  </div>
+</article>

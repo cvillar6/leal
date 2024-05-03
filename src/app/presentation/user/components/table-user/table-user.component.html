@@ -1,0 +1,143 @@
+<article *ngIf="users; else loading">
+  <input
+    class="mb-4 min-w-80 rounded-lg border p-4"
+    matInput
+    (keyup)="applyFilter($event)"
+    [placeholder]="SEARCH_PLACEHOLDER"
+    #input
+  />
+
+  <table
+    class="mb-10 rounded-lg shadow"
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+  >
+    <ng-container matColumnDef="id">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ ID }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1 py-3"
+        mat-cell
+        *matCellDef="let row"
+      >
+        {{ row.id }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fullName">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ NAME }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1"
+        mat-cell
+        *matCellDef="let row"
+      >
+        {{ row.name }} {{ row.lastName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="points">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ POINTS }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1 py-3"
+        mat-cell
+        *matCellDef="let row"
+      >
+        {{ row.points | number }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ STATUS }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1 py-3"
+        mat-cell
+        *matCellDef="let row"
+      >
+        <leal-status [status]="row.active"></leal-status>
+      </td>
+    </ng-container>
+
+    <ng-container *ngIf="permissionService.isAdmin()" matColumnDef="actions">
+      <th
+        class="font-satoshiMedium text-general-2 bg-general-3"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        {{ ACTIONS }}
+      </th>
+      <td
+        class="font-satoshiBold text-general-1 py-3"
+        mat-cell
+        *matCellDef="let row"
+      >
+        <div class="flex gap-2">
+          <button
+            (click)="updateUser(row)"
+            class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border p-2"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Editar"
+              fontIcon="edit"
+            ></mat-icon>
+            {{ EDIT }}
+          </button>
+          <button
+            (click)="deleteUser(row.id)"
+            class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border p-2"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Eliminar"
+              fontIcon="delete"
+            ></mat-icon>
+            {{ REMOVE }}
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+</article>
+
+<ng-template #loading>
+  <div>Cargando</div>
+</ng-template>

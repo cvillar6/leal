@@ -1,0 +1,19 @@
+<main>
+  <section class="mx-auto mb-10 max-w-[968px]">
+    <app-create-user></app-create-user>
+  </section>
+
+  <section class="mx-auto mb-10 max-w-[968px]">
+    <app-data-user [users]="users"></app-data-user>
+  </section>
+
+  <section *ngIf="isDesktop; else userList" class="mx-auto max-w-[968px]">
+    <app-table-user [users]="users"></app-table-user>
+  </section>
+
+  <ng-template #userList>
+    <section>
+      <app-list-user [users]="users"></app-list-user>
+    </section>
+  </ng-template>
+</main>
