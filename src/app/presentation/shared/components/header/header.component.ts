@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   TITLE: string = '🛒 Leal';
+  LOGOUT: string = 'Cerrar sesión';
 }
