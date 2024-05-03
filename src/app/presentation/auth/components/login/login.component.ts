@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthModel } from 'src/app/core/models/auth.model';
+import { AuthRepository } from 'src/app/core/repositories/auth.repository';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent {
-  TITLE: string = 'Ingresar a Leal shop';
+  TITLE: string = 'Ingresar a Leal';
   DESCRIPTION: string = 'Bienvenido de nuevo';
   LOGIN: string = 'Iniciar sesión';
 
@@ -21,9 +23,17 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authRepository: AuthRepository
+  ) {}
 
   onSubmit() {
-    console.log(this.authForm);
+    const auth: AuthModel = {
+      user: this.authForm.value.user ?? '',
+      password: this.authForm.value.password ?? '',
+    };
+
+    console.log(this.authRepository.login(auth));
   }
 }

@@ -6,6 +6,12 @@ import { AuthModel } from 'src/app/core/models/auth.model';
 })
 export class AuthService {
   login(auth: AuthModel): boolean {
-    return true;
+    if (auth.user === 'Admin' && auth.password === 'LealAdmin') {
+      return true;
+    } else if (auth.user === 'Cajero' && auth.password === 'LealCajero') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
