@@ -1,0 +1,75 @@
+<main
+  class="flex h-full items-center justify-center lg:justify-between lg:gap-40"
+>
+  <section class="flex items-center justify-center lg:w-1/2">
+    <div class="rounded-lg border bg-white p-4 shadow lg:max-w-[500px]">
+      <article class="mb-10">
+        <h1 class="font-satoshiBold text-general-1 mb-2 text-3xl">
+          {{ TITLE }}
+        </h1>
+        <p class="font-satoshiMedium text-general-2">{{ DESCRIPTION }}</p>
+      </article>
+      <article>
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="mb-4 w-full">
+            <mat-label class="font-satoshiMedium text-general-2">{{
+              USER
+            }}</mat-label>
+            <input
+              matInput
+              formControlName="user"
+              [placeholder]="USER_PLACEHOLDER"
+              class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
+            />
+          </mat-form-field>
+          <!-- <mat-error
+                      *ngIf="
+                        emailFormControl.hasError('email') &&
+                        !emailFormControl.hasError('required')
+                      "
+                    >
+                      Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                      Email is <strong>required</strong>
+                    </mat-error> -->
+          <mat-form-field class="mb-4 w-full">
+            <mat-label class="font-satoshiMedium text-general-2">{{
+              PASSWORD
+            }}</mat-label>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              [placeholder]="PASSWORD_PLACEHOLDER"
+              class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
+            />
+          </mat-form-field>
+          <!-- <mat-error
+                      *ngIf="
+                        emailFormControl.hasError('email') &&
+                        !emailFormControl.hasError('required')
+                      "
+                    >
+                      Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                      Email is <strong>required</strong>
+                    </mat-error> -->
+
+          <button
+            [disabled]="authForm.invalid"
+            type="submit"
+            class="font-satoshiBold w-full rounded-lg bg-blue-800 px-10 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
+          >
+            {{ LOGIN }}
+          </button>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <section class="hidden lg:flex lg:w-1/2 lg:justify-center">
+    <img src="../../../../../assets/images/login.svg" alt="Login" />
+  </section>
+</main>
