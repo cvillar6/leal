@@ -34,6 +34,6 @@ export class LoginComponent {
       password: this.authForm.value.password ?? '',
     };
 
-    console.log(this.authRepository.login(auth));
+    this.authRepository.login(auth);
   }
 }
