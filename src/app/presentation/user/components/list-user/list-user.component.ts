@@ -5,6 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import 'leal-components';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
@@ -35,7 +36,7 @@ export class ListUserComponent implements OnDestroy {
     public dialog: MatDialog,
     private userRepository: UserRepository,
     private userDataService: UserDataService,
-    public permissionService: PermissionService
+    public permissionService: PermissionService,
   ) {}
 
   deleteUser(userId: string | undefined): void {

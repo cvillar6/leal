@@ -81,7 +81,7 @@
         mat-cell
         *matCellDef="let row"
       >
-        {{ row.active }}
+        <leal-status [status]="row.active"></leal-status>
       </td>
     </ng-container>
 
