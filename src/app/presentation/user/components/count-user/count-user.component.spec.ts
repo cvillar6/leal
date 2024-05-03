@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CountUserComponent } from './count-user.component';
 
 describe('CountUserComponent', () => {
@@ -8,7 +9,8 @@ describe('CountUserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CountUserComponent]
+      declarations: [CountUserComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
     fixture = TestBed.createComponent(CountUserComponent);
     component = fixture.componentInstance;
