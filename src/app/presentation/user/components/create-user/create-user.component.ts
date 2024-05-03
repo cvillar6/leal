@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PermissionService } from 'src/app/utils/services/permission.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 
 @Component({
@@ -13,7 +14,10 @@ export class CreateUserComponent {
     'Aquí puedes crear, editar y eliminar tus usuarios';
   CREATE: string = 'Crear usuario';
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    public permissionService: PermissionService
+  ) {}
 
   openDialog() {
     this.dialog.open(ModalUserComponent);

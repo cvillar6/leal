@@ -3,7 +3,6 @@
     <mat-expansion-panel
       *ngFor="let user of users"
       hideToggle
-      expanded
       class="mb-2.5 rounded-lg"
     >
       <mat-expansion-panel-header class="flex h-auto justify-between p-4">
@@ -51,7 +50,7 @@
         </div>
       </section>
 
-      <section class="flex gap-2 pt-2.5">
+      <section *ngIf="permissionService.isAdmin()" class="flex gap-2 pt-2.5">
         <button
           (click)="updateUser(user)"
           class="font-satoshiBold flex w-full items-center justify-center gap-2 rounded border p-3"
