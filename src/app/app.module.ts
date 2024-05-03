@@ -8,6 +8,7 @@ import { UserRepository } from './core/repositories/user.repository';
 import { AuthRepositoryImpl } from './infrastructure/repositories/auth.repository.impl';
 import { UserRepositoryImpl } from './infrastructure/repositories/user.repository.impl';
 import { AuthModule } from './presentation/auth/auth.module';
+import { SharedModule } from './presentation/shared/shared.module';
 import { UserModule } from './presentation/user/user.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { UserModule } from './presentation/user/user.module';
     BrowserAnimationsModule,
     UserModule,
     AuthModule,
+    SharedModule,
   ],
   providers: [
     { provide: UserRepository, useClass: UserRepositoryImpl },
