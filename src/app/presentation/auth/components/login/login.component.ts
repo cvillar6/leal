@@ -25,7 +25,7 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authRepository: AuthRepository
+    private authRepository: AuthRepository,
   ) {}
 
   onSubmit() {

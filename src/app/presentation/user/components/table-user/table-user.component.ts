@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import 'leal-components';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
@@ -52,7 +53,7 @@ export class TableUserComponent implements OnChanges, OnDestroy {
     public dialog: MatDialog,
     private userRepository: UserRepository,
     private userDataService: UserDataService,
-    public permissionService: PermissionService
+    public permissionService: PermissionService,
   ) {}
 
   ngOnChanges(): void {
