@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
 import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
+import { PermissionService } from 'src/app/utils/services/permission.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 
 @Component({
@@ -34,13 +35,10 @@ export class TableUserComponent implements OnChanges, OnDestroy {
   EDIT: string = 'Editar';
   REMOVE: string = 'Eliminar';
 
-  displayedColumns: string[] = [
-    'id',
-    'fullName',
-    'points',
-    'active',
-    'actions',
-  ];
+  displayedColumns: string[] = this.permissionService.isAdmin()
+    ? ['id', 'fullName', 'points', 'active', 'actions']
+    : ['id', 'fullName', 'points', 'active'];
+
   dataSource!: MatTableDataSource<UserModel>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,7 +51,8 @@ export class TableUserComponent implements OnChanges, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private userRepository: UserRepository,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    public permissionService: PermissionService
   ) {}
 
   ngOnChanges(): void {

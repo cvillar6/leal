@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
+import { RouterOutlet } from '@angular/router';
 import { CountUserComponent } from './components/count-user/count-user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { DataUserComponent } from './components/data-user/data-user.component';
@@ -18,6 +19,8 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { UserComponent } from './components/user/user.component';
+import { UserRoutingModule } from './user-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const angularMaterialModules = [
   MatExpansionModule,
@@ -39,12 +42,15 @@ const angularMaterialModules = [
     CountUserComponent,
     ModalUserComponent,
     DataUserComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
     LayoutModule,
     HttpClientModule,
     ReactiveFormsModule,
+    UserRoutingModule,
+    RouterOutlet,
     ...angularMaterialModules,
   ],
   exports: [UserComponent],
