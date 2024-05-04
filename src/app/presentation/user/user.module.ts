@@ -11,8 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { RouterOutlet } from '@angular/router';
+import { AlertUserComponent } from './components/alert-user/alert-user.component';
 import { CountUserComponent } from './components/count-user/count-user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -33,6 +35,7 @@ const angularMaterialModules = [
   MatDialogModule,
   MatSlideToggleModule,
   MatProgressSpinnerModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
@@ -45,6 +48,7 @@ const angularMaterialModules = [
     ModalUserComponent,
     DataUserComponent,
     DashboardComponent,
+    AlertUserComponent,
   ],
   imports: [
     CommonModule,
