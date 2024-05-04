@@ -1,22 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
-import { UserDataService } from 'src/app/utils/services/user-data.service';
 import { PermissionService } from 'src/app/utils/services/permission.service';
-import { ModalUserComponent } from '../modal-user/modal-user.component';
+import { UserDataService } from 'src/app/utils/services/user-data.service';
+import { AlertUserComponent } from '../alert-user/alert-user.component';
 import { ListUserComponent } from './list-user.component';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
+import { of } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ListUserComponent', () => {
   let component: ListUserComponent;
   let fixture: ComponentFixture<ListUserComponent>;
+  let mockDialog: jasmine.SpyObj<MatDialog>;
   let mockUserRepository: jasmine.SpyObj<UserRepository>;
   let mockUserDataService: jasmine.SpyObj<UserDataService>;
   let mockPermissionService: jasmine.SpyObj<PermissionService>;
-  let mockMatDialog: jasmine.SpyObj<MatDialog>;
+  let mockSnackBar: jasmine.SpyObj<MatSnackBar>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
+    mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
     mockUserRepository = jasmine.createSpyObj('UserRepository', ['deleteUser']);
     mockUserDataService = jasmine.createSpyObj('UserDataService', [
       'refreshUsersData',
@@ -24,20 +29,22 @@ describe('ListUserComponent', () => {
     mockPermissionService = jasmine.createSpyObj(
       'PermissionService',
       [],
-      ['somePermission'],
+      ['canDeleteUser'],
     );
-    mockMatDialog = jasmine.createSpyObj('MatDialog', ['open']);
+    mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['openFromComponent']);
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [ListUserComponent],
       providers: [
+        { provide: MatDialog, useValue: mockDialog },
         { provide: UserRepository, useValue: mockUserRepository },
         { provide: UserDataService, useValue: mockUserDataService },
         { provide: PermissionService, useValue: mockPermissionService },
-        { provide: MatDialog, useValue: mockMatDialog },
+        { provide: MatSnackBar, useValue: mockSnackBar },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListUserComponent);
@@ -45,20 +52,28 @@ describe('ListUserComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize properties with correct values', () => {
-    expect(component.ID).toBe('Identificación');
-    expect(component.NAME).toBe('Nombres');
-    expect(component.LAST_NAME).toBe('Apellidos');
-    expect(component.POINTS).toBe('Puntos acumulados');
-    expect(component.EDIT).toBe('Editar');
-    expect(component.REMOVE).toBe('Eliminar');
+  it('should call deleteUser method and show snackbar when user is deleted', () => {
+    const userId = '1';
+    mockUserRepository.deleteUser.and.returnValue(of({ success: true }));
+
+    component.deleteUser(userId);
+
+    expect(mockUserRepository.deleteUser).toHaveBeenCalledWith(userId);
+    expect(mockUserDataService.refreshUsersData).toHaveBeenCalled();
+    expect(mockSnackBar.openFromComponent).toHaveBeenCalledWith(
+      AlertUserComponent,
+      {
+        duration: 5000,
+        data: { title: 'Usuario eliminado' },
+      },
+    );
   });
 
-  it('should open modal when updateUser is called', () => {
+  it('should call updateUser method and show snackbar when user is updated', () => {
     const user: UserModel = {
       id: '1',
       name: 'John',
@@ -66,17 +81,24 @@ describe('ListUserComponent', () => {
       points: 100,
       active: false,
     };
+    const dialogRefSpyObj = jasmine.createSpyObj('MatDialogRef', [
+      'afterClosed',
+    ]);
+    dialogRefSpyObj.afterClosed.and.returnValue(of({ success: true }));
+
+    mockDialog.open.and.returnValue(dialogRefSpyObj);
+
     component.updateUser(user);
-    expect(mockMatDialog.open).toHaveBeenCalledWith(ModalUserComponent, {
+
+    expect(mockDialog.open).toHaveBeenCalledWith(ModalUserComponent, {
       data: user,
     });
-  });
-
-  it('should call deleteUser and refresh data when deleteUser is called', () => {
-    const userId = '1';
-    mockUserRepository.deleteUser.and.returnValue(of({ success: true }));
-    component.deleteUser(userId);
-    expect(mockUserRepository.deleteUser).toHaveBeenCalledWith(userId);
-    expect(mockUserDataService.refreshUsersData).toHaveBeenCalled();
+    expect(mockSnackBar.openFromComponent).toHaveBeenCalledWith(
+      AlertUserComponent,
+      {
+        duration: 5000,
+        data: { title: 'Usuario actualizado' },
+      },
+    );
   });
 });

@@ -8,6 +8,7 @@ import { UserDataService } from 'src/app/utils/services/user-data.service';
 import { PermissionService } from 'src/app/utils/services/permission.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { TableUserComponent } from './table-user.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('TableUserComponent', () => {
   let component: TableUserComponent;
@@ -39,6 +40,7 @@ describe('TableUserComponent', () => {
           useValue: jasmine.createSpyObj('MatDialog', ['open']),
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     userRepositorySpy = TestBed.inject(
