@@ -129,15 +129,16 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-    <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">
-        No data matching the filter "{{ input.value }}"
+        No hay usuarios con la búsqueda realizada: "{{ input.value }}"
       </td>
     </tr>
   </table>
 </article>
 
 <ng-template #loading>
-  <div>Cargando</div>
+  <div class="flex justify-center p-6">
+    <mat-spinner></mat-spinner>
+  </div>
 </ng-template>

@@ -12,7 +12,7 @@
               {{ user.name.charAt(0).toUpperCase()
               }}{{ user.lastName.charAt(0).toUpperCase() }}
             </div>
-            <p>{{ user.name }}</p>
+            <p>{{ user.name }} {{ user.lastName }}</p>
           </div>
         </mat-panel-title>
         <mat-panel-description
@@ -74,6 +74,8 @@
   </mat-accordion>
 
   <ng-template #loading>
-    <div>Cargando</div>
+    <div class="flex justify-center p-6">
+      <mat-spinner></mat-spinner>
+    </div>
   </ng-template>
 </article>

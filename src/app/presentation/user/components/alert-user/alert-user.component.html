@@ -1,0 +1,15 @@
+<div class="flex justify-between items-center p-4">
+  <span class="font-satoshiBold text-general-1" matSnackBarLabel>
+    {{ alertData.title }}
+  </span>
+  <span matSnackBarActions>
+    <button
+      class="text-blue-500 font-satoshiBold p-2"
+      mat-button
+      matSnackBarAction
+      (click)="snackBarRef.dismissWithAction()"
+    >
+      Cerrar
+    </button>
+  </span>
+</div>

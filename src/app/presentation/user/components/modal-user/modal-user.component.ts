@@ -1,10 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
-import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
+import { UserDataService } from 'src/app/utils/services/user-data.service';
 
 @Component({
   selector: 'app-modal-user',
@@ -22,8 +22,10 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   ID_PLACEHOLDER: string = 'Ingresa la identificación';
   NAME: string = 'Nombres';
   NAME_PLACEHOLDER: string = 'Ingresa los nombres';
+  NAME_ERROR: string = 'El nombre del usuario es obligatorio';
   LAST_NAME: string = 'Apellidos';
   LAST_NAME_PLACEHOLDER: string = 'Ingresa los apellidos';
+  LAST_NAME_ERROR: string = 'Los apellidos del usuario son obligatorios';
   POINTS: string = 'Puntos acumulados';
   POINTS_PLACEHOLDER: string = 'Ingresa los puntos acumulados';
 
@@ -48,7 +50,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public editUser: UserModel | undefined,
     private formBuilder: FormBuilder,
     private userRepository: UserRepository,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +90,10 @@ export class ModalUserComponent implements OnInit, OnDestroy {
       this.userDataService.refreshUsersData();
       this.closeDialog();
     });
+  }
+
+  getUserFormControl(formControlName: string): FormControl {
+    return this.userForm.get(formControlName) as FormControl;
   }
 
   closeDialog(): void {
