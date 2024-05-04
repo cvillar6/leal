@@ -36,7 +36,7 @@ describe('AdminGuard', () => {
   });
 
   it('should navigate to login and return false if session data is not admin', async () => {
-    spyOn(localStorage, 'getItem').and.returnValue('user'); // Assuming session data is not 'admin'
+    spyOn(localStorage, 'getItem').and.returnValue('user');
 
     const result = await TestBed.runInInjectionContext(() =>
       adminGuard(mockActivatedRouteSnapshot(), mockRouterStateSnapshot()),
