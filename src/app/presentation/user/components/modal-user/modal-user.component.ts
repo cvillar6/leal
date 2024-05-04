@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
-import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
+import { UserDataService } from 'src/app/utils/services/user-data.service';
 
 @Component({
   selector: 'app-modal-user',
@@ -48,7 +48,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public editUser: UserModel | undefined,
     private formBuilder: FormBuilder,
     private userRepository: UserRepository,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
   ) {}
 
   ngOnInit(): void {

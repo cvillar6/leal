@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { of } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
-import { UserDataService } from 'src/app/infrastructure/services/user-data.service';
+import { UserDataService } from 'src/app/utils/services/user-data.service';
 import { PermissionService } from 'src/app/utils/services/permission.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { TableUserComponent } from './table-user.component';
