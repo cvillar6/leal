@@ -43,19 +43,8 @@
           class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
         />
       </mat-form-field>
-      <!-- <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') &&
-              !emailFormControl.hasError('required')
-            "
-          >
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error> -->
 
-      <mat-form-field class="mb-4 w-full">
+      <mat-form-field class="w-full">
         <mat-label class="font-satoshiMedium text-general-2">{{
           NAME
         }}</mat-label>
@@ -66,18 +55,16 @@
           class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
         />
       </mat-form-field>
-      <!-- <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') &&
-              !emailFormControl.hasError('required')
-            "
-          >
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error> -->
-      <mat-form-field class="mb-4 w-full">
+      <mat-error
+        *ngIf="
+          getUserFormControl('name').hasError('required') &&
+          getUserFormControl('name').touched
+        "
+      >
+        {{ NAME_ERROR }}
+      </mat-error>
+
+      <mat-form-field class="mt-4 w-full">
         <mat-label class="font-satoshiMedium text-general-2">{{
           LAST_NAME
         }}</mat-label>
@@ -88,43 +75,30 @@
           class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
         />
       </mat-form-field>
-      <!-- <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') &&
-              !emailFormControl.hasError('required')
-            "
-          >
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error> -->
-      <mat-form-field class="mb-4 w-full">
+      <mat-error
+        *ngIf="
+          getUserFormControl('lastName').hasError('required') &&
+          getUserFormControl('lastName').touched
+        "
+      >
+        {{ LAST_NAME_ERROR }}
+      </mat-error>
+      <mat-form-field class="mt-4 w-full">
         <mat-label class="font-satoshiMedium text-general-2">{{
           POINTS
         }}</mat-label>
         <input
+          type="number"
           matInput
           formControlName="points"
           [placeholder]="POINTS_PLACEHOLDER"
           class="font-satoshi text-general-1 w-full rounded-lg border p-4 pl-0"
         />
       </mat-form-field>
-      <!-- <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') &&
-              !emailFormControl.hasError('required')
-            "
-          >
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error> -->
 
-      <div *ngIf="editUser" class="flex items-center justify-between">
+      <div *ngIf="editUser" class="mt-4 flex items-center justify-between">
         <mat-label class="font-satoshiBold text-general-1 text-2xl">{{
-          userForm.get('active')?.value ? DEACTIVE : ACTIVE
+          userForm.get("active")?.value ? DEACTIVE : ACTIVE
         }}</mat-label>
 
         <mat-slide-toggle
