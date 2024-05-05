@@ -1,6 +1,6 @@
 # Leal
 
-Puedes ingresar a la solución por medio de: [camilo-villa-leal.com](www.camilo-villa-leal.com)
+Puedes ingresar a la solución por medio de: [camilo-villa-leal.com](https://camilo-villa-leal.com)
 
 ## Antes de empezar... solucionemos asuntos pendientes 🚀
 
@@ -86,7 +86,7 @@ En este directorio se definen funciones que usaremos en toda la aplicación, son
 
 Para la solución al problema planteado, se eligieron varias tecnologías como AWS, Angular y una API para el manejo de los request.
 
-Como el diagrama lo indica, el usuario ingresa a la aplicación por medio de [camilo-villa-leal.com](www.camilo-villa-leal.com). Esto gracias al servicio de AWS Route 53, el cual cuenta con un DNS que nos permite redireccionar a la aplicación almacenada en Cloudfront, otro servicio de AWS que nos permite tener un grupo de servidores distribuidos en diferentes ubicaciones geográficas de todo el mundo para permitir la entrega rápida del contenido del sitio web. También se puede apreciar que el sitio es seguro, de manera que se utilizó el servicio de manejo de certificaciones en AWS, de forma que podemos realizar peticiones bajo el protocolo HTTPS. Cloudfront usa el contenido almacenado en S3, otro servicio de AWS que sirve para guardar información, en este caso el distribuido generado por Angular.
+Como el diagrama lo indica, el usuario ingresa a la aplicación por medio de [camilo-villa-leal.com](https://camilo-villa-leal.com). Esto gracias al servicio de AWS Route 53, el cual cuenta con un DNS que nos permite redireccionar a la aplicación almacenada en Cloudfront, otro servicio de AWS que nos permite tener un grupo de servidores distribuidos en diferentes ubicaciones geográficas de todo el mundo para permitir la entrega rápida del contenido del sitio web. También se puede apreciar que el sitio es seguro, de manera que se utilizó el servicio de manejo de certificaciones en AWS, de forma que podemos realizar peticiones bajo el protocolo HTTPS. Cloudfront usa el contenido almacenado en S3, otro servicio de AWS que sirve para guardar información, en este caso el distribuido generado por Angular.
 
 La aplicación fue desarrollada en Angular junto con Stenciljs, así es, por medio de npm se carga un proyecto de componentes web realizados en Stenciljs, los cuales pueden ser usados por cualquier proyecto que consuma esta librería de NPM y consume una API llamada Beeceptor, la cual cuenta con varias funcionalidades y una de ella es un sistema CRUD para usuarios, estas funciones se realizan bajo un servidor externo y luego esos datos son almacenados en una base de datos.
 
