@@ -38,19 +38,37 @@ Fuente: https://www.browserstack.com/guide/what-is-browser
 
 ### 🧍🏻‍♀️🧍🏻‍♂️ Modelo de dominio
 
-![Modelo de dominio](./src/assets/images/domainModel.png)
+Durante la etapa de planeación, encontré tres posibles soluciones frente al posible diseño del modelo de dominio.
+
+#### Propuesta #1
+
+![Modelo de dominio](./src/assets/images/domainModel1.png)
+
+Se identificó una entidad Cliente, la cual cuenta con las siguientes propiedades: id, usuario, contraseña, nombre, apellido, activo, puntos acumulados y rol, además cuenta con la capacidad de leer los datos de todos los usuarios.
+
+A partir de la entidad Cliente, se identicó dos tipos de roles, Admin y Cajero, los cuales heredan todas las propiedades del Cliente.
+
+#### Propuesta #2
+
+![Modelo de dominio](./src/assets/images/domainModel2.png)
+
+Se identificó una entidad Cliente, la cual cuenta con las siguientes propiedades: id, usuario, contraseña, nombre, apellido, activo, puntos acumulados, rol y lista de permisos, los cuales pueden ser: Leer, crear, actualizar o eliminar usuarios.
+
+#### Propuesta 3
+
+![Modelo de dominio](./src/assets/images/domainModel3.png)
 
 Se identificaron 2 entidades, Usuario y Cliente.
 
-El usuario tiene la capacidad de ingresar a la plataforma y realizar un conjunto de acciones dependiendo de su rol.
+El cliente tiene la capacidad de ingresar a la plataforma y realizar un conjunto de acciones dependiendo de su rol.
 
-Si el usuario es de tipo Admin, el usuario podrá crear, leer, actualizar y eliminar datos de un cliente.
+Si el cliente es de tipo Admin, el cliente podrá crear, leer, actualizar y eliminar datos de un usuario.
 
-Si el usuario es de tipo Cliente, el usuario solo podrá leer los datos del cliente.
+Si el cliente es de tipo Cajero, el cliente solo podrá leer los datos del usuario.
 
 Ambos cuentan con usuario y contraseña para ingresar a la aplicación.
 
-Por otro lado tenemos al cliente, esta entidad cuenta con varias propiedades, entre ellas el id, nombre, apellido, puntos acumulados y si está activo o no.
+Por otro lado tenemos al usuario, esta entidad cuenta con varias propiedades, entre ellas el id, nombre, apellido, puntos acumulados y si está activo o no.
 
 ### ⬡ Arquitectura hexagonal
 
